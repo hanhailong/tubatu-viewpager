@@ -1,5 +1,6 @@
 package com.hhl.tubatu;
 
+import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -27,5 +28,9 @@ public class ScalePageTransformer implements ViewPager.PageTransformer {
         float scaleValue = MIN_SCALE + tempScale * slope;
         page.setScaleX(scaleValue);
         page.setScaleY(scaleValue);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            page.getParent().requestLayout();
+        }
     }
 }

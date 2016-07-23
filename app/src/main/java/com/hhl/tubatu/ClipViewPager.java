@@ -25,9 +25,9 @@ public class ClipViewPager extends ViewPager {
         if (ev.getAction() == MotionEvent.ACTION_UP) {
             View view = viewOfClickOnScreen(ev);
             if (view != null) {
-                int index = indexOfChild(view);
+                int index = (Integer) view.getTag();
                 if (getCurrentItem() != index) {
-                    setCurrentItem(indexOfChild(view));
+                    setCurrentItem(index);
                 }
             }
         }
@@ -44,6 +44,7 @@ public class ClipViewPager extends ViewPager {
         int[] location = new int[2];
         for (int i = 0; i < childCount; i++) {
             View v = getChildAt(i);
+            int position = (Integer) v.getTag();
             v.getLocationOnScreen(location);
             int minX = location[0];
             int minY = getTop();
@@ -51,12 +52,12 @@ public class ClipViewPager extends ViewPager {
             int maxX = location[0] + v.getWidth();
             int maxY = getBottom();
 
-            if(i < currentIndex){
+            if(position < currentIndex){
                 maxX -= v.getWidth() * (1 - ScalePageTransformer.MIN_SCALE) * 0.5 + v.getWidth() * (Math.abs(1 - ScalePageTransformer.MAX_SCALE)) * 0.5;
                 minX -= v.getWidth() * (1 - ScalePageTransformer.MIN_SCALE) * 0.5 + v.getWidth() * (Math.abs(1 - ScalePageTransformer.MAX_SCALE)) * 0.5;
-            }else if(i == currentIndex){
+            }else if(position == currentIndex){
                 minX += v.getWidth() * (Math.abs(1 - ScalePageTransformer.MAX_SCALE));
-            }else if(i > currentIndex){
+            }else if(position > currentIndex){
                 maxX -= v.getWidth() * (Math.abs(1 - ScalePageTransformer.MAX_SCALE)) * 0.5;
                 minX -= v.getWidth() * (Math.abs(1 - ScalePageTransformer.MAX_SCALE)) * 0.5;
             }

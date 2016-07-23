@@ -66,8 +66,17 @@ public class MainActivity extends AppCompatActivity {
         list.add(R.drawable.style_dny);
         list.add(R.drawable.style_rishi);
 
+        list.add(R.drawable.style_xiandai);
+        list.add(R.drawable.style_jianyue);
+        list.add(R.drawable.style_oushi);
+        list.add(R.drawable.style_zhongshi);
+        list.add(R.drawable.style_meishi);
+        list.add(R.drawable.style_dzh);
+        list.add(R.drawable.style_dny);
+        list.add(R.drawable.style_rishi);
+
         //设置OffscreenPageLimit
-        mViewPager.setOffscreenPageLimit(list.size());
+        mViewPager.setOffscreenPageLimit(Math.min(list.size(), 5));
         mPagerAdapter.addAll(list);
     }
 

@@ -47,10 +47,10 @@ public class ClipViewPager extends ViewPager {
             int position = (Integer) v.getTag();
             v.getLocationOnScreen(location);
             int minX = location[0];
-            int minY = getTop();
+            int minY = location[1];
 
             int maxX = location[0] + v.getWidth();
-            int maxY = getBottom();
+            int maxY = location[1] + v.getHeight();
 
             if(position < currentIndex){
                 maxX -= v.getWidth() * (1 - ScalePageTransformer.MIN_SCALE) * 0.5 + v.getWidth() * (Math.abs(1 - ScalePageTransformer.MAX_SCALE)) * 0.5;
